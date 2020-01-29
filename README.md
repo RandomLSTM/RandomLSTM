@@ -1,22 +1,17 @@
 # Random LSTM
 
-# Installation
+# Model Setup
 
 ## Dependencies
 
-Tensorflow Object Detection API depends on the following libraries:
+Random LSTM depends on the following libraries:
 
-*   Protobuf 3.0.0
-*   Python-tk
-*   Pillow 1.0
-*   lxml
-*   tf Slim (which is included in the "tensorflow/models/research/" checkout)
-*   Jupyter notebook
+*   Pandas
+*   Scikit-learn
+*   Keras
+*   Tensorflow 
+*   Numpy
 *   Matplotlib
-*   Tensorflow (>=1.12.0)
-*   Cython
-*   contextlib2
-*   cocoapi
 
 For detailed steps to install Tensorflow, follow the [Tensorflow installation
 instructions](https://www.tensorflow.org/install/). A typical user can install
