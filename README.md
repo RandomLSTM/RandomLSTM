@@ -381,7 +381,6 @@ Datasets are Iris, Pima Indian Diabetes(PID), Breast Cancer Wisconsin(BCW), Bloo
 <p align="center">
   <img src="https://raw.githubusercontent.com/RandomLSTM/RandomLSTM/master/Code/Dataset.png" width=500 height=300>
 </p>
-<p align="center"><img src="https://raw.githubusercontent.com/RandomLSTM/RandomLSTM/master/Code/Dataset.png" width=500 height=300></p>
 
 # Result Analysis
 The comparative analysis results for the five datasets show in the table. The comparative models are Support vector Machine (SVM), Naive Bayesian (NB), Decision Tree (DT), Random Forest (RF), Gaussian process classification (GPC), LSTM and Random Weighted LSTM (RWL).
@@ -390,5 +389,4 @@ The comparative analysis results for the five datasets show in the table. The co
   <img src="https://raw.githubusercontent.com/RandomLSTM/RandomLSTM/master/Code/Result.png" width=500 height=300>
 </p>
 
-<p>&nbsp</p>
 
