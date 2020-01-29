@@ -61,10 +61,10 @@ data_new2= data.iloc[split_count:, :]
 
 import array as arr
 #data = arr.array('d', 10)
-temp_data = [None] * 10
-temp_data1 = [None] * 10
-best_temp_data = [None] * 3
-best_temp_data1 = [None] * 3
+temp_data = [None] * t # t is the total subset number 
+temp_data1 = [None] * t # t is the total subset number 
+best_temp_data = [None] * n # n is the best odd subset number
+best_temp_data1 = [None] * n # n is the best odd subset number
 
 
 def subset(split_data):
@@ -151,7 +151,7 @@ def subset2(split_data):
 j = 0
 i = 0
 acc_array1=[]
-while i < 10:
+while i < t: # t is the total subset number 
   temp_data1[i]=subset2(data_new2)
   X = temp_data1[i].iloc[:, :-1].values
   y = temp_data1[i].iloc[:, -1].values
@@ -186,7 +186,7 @@ while i < 10:
   x = acc_on_test(X_test_new,y_test_new,model)
   x=x*100
   j +=1
-  if x>45:
+  if x > th: # th is the threshold value
     acc_array1.append(x)
     print ("Accuracy on test data: ", x)
     i +=1
@@ -197,7 +197,7 @@ while i < 10:
 
 print ("Total loop: ",j)
 
-number = 10
+number = t # t is the total subset number
 for i in range (number-1):
     for j in range(number - i - 1):
         if(acc_array1[j] < acc_array1[j + 1]):
@@ -208,13 +208,13 @@ for i in range (number-1):
              temp_data1[j] = temp_data1[j + 1]
              temp_data1[j + 1] = temp
 
-for x in range(0,3):
+for x in range(0,n): # n is the best odd subset number
   best_temp_data1[x]= temp_data1[x]
 
 # mean SD of 30% data
 mean_30 = []
 sd_30 = []
-for i in range(0,3):
+for i in range(0,n): # n is the best odd subset number
   df = pd.DataFrame(best_temp_data1[i])
   mean = 0;
   sd=0;
@@ -238,7 +238,7 @@ Use 70% data for model training.
 j = 0
 i = 0
 acc_array=[]
-while i < 10:
+while i < t: # t is the total subset number 
   temp_data[i]=subset(data_new1)
   X = temp_data[i].iloc[:, :-1].values
   y = temp_data[i].iloc[:, -1].values
@@ -272,7 +272,7 @@ while i < 10:
   x = acc_on_test(X_test_new,y_test_new,model)
   x=x*100
   j +=1
-  if x>45:
+  if x > th: # th is the threshold value
     acc_array.append(x)
     print ("Accuracy on test data: ", x)
     i +=1
@@ -283,7 +283,7 @@ while i < 10:
 
 print ("Total loop: ",j)
 
-number = 10
+number = t # t is the total subset number 
 for i in range (number-1):
     for j in range(number - i - 1):
         if(acc_array[j] < acc_array[j + 1]):
@@ -294,13 +294,13 @@ for i in range (number-1):
              temp_data[j] = temp_data[j + 1]
              temp_data[j + 1] = temp
 
-for x in range(0,3):
+for x in range(0,n): # n is the best odd subset number
   best_temp_data[x]= temp_data[x]
 
 # mean SD of 70% data
 mean_70 = []
 sd_70 = []
-for i in range(0,3):
+for i in range(0,n): # n is the best odd subset number
   df = pd.DataFrame(best_temp_data[i])
   mean = 0;
   sd=0;
@@ -318,13 +318,13 @@ for i in range(0,3):
   sd_70.append(sd)
 
 dis_70 = []
-for i in range(0,3):
+for i in range(0,n): # n is the best odd subset number
  dis_70.append(mean_70[i] + sd_70[i])
 dis_70
 
 
 dis_30 = []
-for i in range(0,3):
+for i in range(0,n): # n is the best odd subset number
  dis_30.append(mean_30[i] + sd_30[i])
 dis_30
 
@@ -332,8 +332,8 @@ dis_30
 ## Final Setup
 Find the similar subsets and calculate the result.
 ``` bash
-number = 3
-num = 2
+number = n # n is the best odd subset number
+num = 2 
 temp3 = []
 
 for i in range (number-1):
@@ -369,7 +369,7 @@ for i in range (num-1):
 #Final weighted Accuracy
 temp1 = 0
 temp2 = 0
-for i in range (0 ,3):
+for i in range (0 ,n): # n is the best odd subset number
   temp1 += (acc_array[i]* acc_array1[i])
   temp2 += acc_array1[i]
 finalAccuracy = temp1/temp2
@@ -379,14 +379,14 @@ print('Final weighted accuracy: %g' % (finalAccuracy))
 Datasets are Iris, Pima Indian Diabetes(PID), Breast Cancer Wisconsin(BCW), Blood Transfusion Service Center(BTSC), Banknote Authentication(BA).
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/RandomLSTM/RandomLSTM/master/Code/Dataset.png" width=500 height=300>
+  <img src="https://raw.githubusercontent.com/RandomLSTM/RandomLSTM/master/Dataset.png" width=500 height=300>
 </p>
 
 # Result Analysis
 The comparative analysis results for the five datasets show in the table. The comparative models are Support vector Machine (SVM), Naive Bayesian (NB), Decision Tree (DT), Random Forest (RF), Gaussian process classification (GPC), LSTM and Random Weighted LSTM (RWL).
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/RandomLSTM/RandomLSTM/master/Code/Result.png" width=500 height=300>
+  <img src="https://raw.githubusercontent.com/RandomLSTM/RandomLSTM/master/Result.png" width=500 height=300>
 </p>
 
 
