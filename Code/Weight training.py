@@ -75,3 +75,24 @@ for i in range (number-1):
 
 for x in range(0,3):
   best_temp_data1[x]= temp_data1[x]
+
+# mean SD of 30% data
+mean_30 = []
+sd_30 = []
+for i in range(0,3):
+  df = pd.DataFrame(best_temp_data1[i])
+  mean = 0;
+  sd=0;
+  #df.iloc[:,0]
+  import statistics 
+  temp=df.shape[1]
+  for i in range(temp-1):
+    y = statistics.mean(df.iloc[:, i ])
+    z= statistics.stdev(df.iloc[:, i ])
+    mean += y
+    sd += z 
+
+  print('Mean for 30 =  %g' % (mean))
+  print('Standard Deviation for 30 =  %g' % (sd))
+  mean_30.append(mean)
+  sd_30.append(sd)
