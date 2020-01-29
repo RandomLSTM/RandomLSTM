@@ -47,7 +47,7 @@ uploaded = files.upload()
 
 ```
 ## Data Processing
-In this part we split the datset by 30% And 70% data
+Split the datset by 30% And 70% data.
 ``` bash
 import pandas as pd
 data=pd.read_csv("diabetes.csv")
@@ -133,7 +133,7 @@ def acc_on_test(x,y,model):
 
 ```
 ## Wight Training
-
+Use 30% data for weight training.
 ``` bash
 import numpy as np
 import matplotlib.pyplot as plt
@@ -146,7 +146,6 @@ from keras.models import Sequential
 def subset2(split_data):
   #data.sample(frac =.10, replace=True, random_state=1) 
   return split_data.sample(frac=.30, replace=True) 
-
 
 #30%
 j = 0
@@ -211,9 +210,30 @@ for i in range (number-1):
 
 for x in range(0,3):
   best_temp_data1[x]= temp_data1[x]
+
+# mean SD of 30% data
+mean_30 = []
+sd_30 = []
+for i in range(0,3):
+  df = pd.DataFrame(best_temp_data1[i])
+  mean = 0;
+  sd=0;
+  #df.iloc[:,0]
+  import statistics 
+  temp=df.shape[1]
+  for i in range(temp-1):
+    y = statistics.mean(df.iloc[:, i ])
+    z= statistics.stdev(df.iloc[:, i ])
+    mean += y
+    sd += z 
+
+  print('Mean for 30 =  %g' % (mean))
+  print('Standard Deviation for 30 =  %g' % (sd))
+  mean_30.append(mean)
+  sd_30.append(sd)
 ```
 ## Model Training
-
+Use 70% data for model training.
 ``` bash
 j = 0
 i = 0
@@ -237,7 +257,6 @@ while i < 10:
   y_train_new = np_utils.to_categorical(ytrain)
   y_train_new = y_train_new.reshape(y_train_new.shape[0],1,y_train_new.shape[1])
   #print(y_train_new.shape)
-
 
   y_test_new = np_utils.to_categorical(ytest)
   y_test_new = y_test_new.reshape(y_test_new.shape[0],1,y_test_new.shape[1])
@@ -298,28 +317,6 @@ for i in range(0,3):
   mean_70.append(mean)
   sd_70.append(sd)
 
-# mean SD of 30% data
-mean_30 = []
-sd_30 = []
-for i in range(0,3):
-  df = pd.DataFrame(best_temp_data1[i])
-  mean = 0;
-  sd=0;
-  #df.iloc[:,0]
-  import statistics 
-  temp=df.shape[1]
-  for i in range(temp-1):
-    y = statistics.mean(df.iloc[:, i ])
-    z= statistics.stdev(df.iloc[:, i ])
-    mean += y
-    sd += z 
-
-  print('Mean for 30 =  %g' % (mean))
-  print('Standard Deviation for 30 =  %g' % (sd))
-  mean_30.append(mean)
-  sd_30.append(sd)
-
-
 dis_70 = []
 for i in range(0,3):
  dis_70.append(mean_70[i] + sd_70[i])
@@ -333,7 +330,7 @@ dis_30
 
 ```
 ## Final Setup
-
+Find the similar subsets and calculate the result.
 ``` bash
 number = 3
 num = 2
@@ -378,4 +375,18 @@ for i in range (0 ,3):
 finalAccuracy = temp1/temp2
 print('Final weighted accuracy: %g' % (finalAccuracy))
 ```
+# Datasets Information
+Datasets are Iris, Pima Indian Diabetes(PID), Breast Cancer Wisconsin(BCW), Blood Transfusion Service Center(BTSC), Banknote Authentication(BA).
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/RandomLSTM/RandomLSTM/master/Code/Dataset.png" width=500 height=300>
+</p>
+
+# Result Analysis
+The comparative analysis results for the five datasets show in the table. The comparative models are Support vector Machine (SVM), Naive Bayesian (NB), Decision Tree (DT), Random Forest (RF), Gaussian process classification (GPC), LSTM and Random Weighted LSTM (RWL).
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/RandomLSTM/RandomLSTM/master/Code/Result.png" width=500 height=300>
+</p>
+
 
