@@ -1,9 +1,8 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
-from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import confusion_matrix
-from sklearn.tree import DecisionTreeClassifier
+
 
 from keras.models import Sequential
 from keras.layers import Dense
@@ -37,13 +36,9 @@ temp_data = [None] * 10
 temp_data1 = [None] * 10
 best_temp_data = [None] * 3
 best_temp_data1 = [None] * 3
-#for i in range(0,9):
-    #  data[i]=df.sample(frac=0.1, replace=True, random_state=1)
-    #temp_data[i]=data.sample(frac =.10,replace=True) 
-    #print(temp_data[i])
+
 
 def subset(split_data):
-  #data.sample(frac =.10, replace=True, random_state=1) 
   return split_data.sample(frac=.10, replace=True) 
 
 import matplotlib.pyplot as plt
